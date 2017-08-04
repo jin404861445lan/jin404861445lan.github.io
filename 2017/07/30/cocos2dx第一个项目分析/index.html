@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="cocos2dx," />
 
 
 
@@ -84,22 +84,19 @@
 
 
 
-<meta name="description" content="###Handler的定义主要是接受子线程发送的数据，并用此线程数据配合主线程更新UI。
-Handler特点
-1.handler可以分发Message对象和Runnable对象到主线程中，每个Handler实例，都会绑定到创建他的线程中。">
+<meta name="description" content="Director(导演)类
+123456789101112131415161718192021222324252627282930313233343536373839404142434445bool AppDelegate::applicationDidFinishLaunching() &amp;#123;    // 单例方法获取导演类    auto director = Director::get">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android中Handler详解">
-<meta property="og:url" content="http://blog.zengjunnan.com/2017/02/06/Android中Handler详解/index.html">
+<meta property="og:title" content="cocos2dx第一个项目分析">
+<meta property="og:url" content="http://blog.zengjunnan.com/2017/07/30/cocos2dx第一个项目分析/index.html">
 <meta property="og:site_name" content="曾俊男个人博客">
-<meta property="og:description" content="###Handler的定义主要是接受子线程发送的数据，并用此线程数据配合主线程更新UI。
-Handler特点
-1.handler可以分发Message对象和Runnable对象到主线程中，每个Handler实例，都会绑定到创建他的线程中。">
-<meta property="og:updated_time" content="2017-04-12T02:58:14.000Z">
+<meta property="og:description" content="Director(导演)类
+123456789101112131415161718192021222324252627282930313233343536373839404142434445bool AppDelegate::applicationDidFinishLaunching() &amp;#123;    // 单例方法获取导演类    auto director = Director::get">
+<meta property="og:updated_time" content="2017-07-30T09:58:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android中Handler详解">
-<meta name="twitter:description" content="###Handler的定义主要是接受子线程发送的数据，并用此线程数据配合主线程更新UI。
-Handler特点
-1.handler可以分发Message对象和Runnable对象到主线程中，每个Handler实例，都会绑定到创建他的线程中。">
+<meta name="twitter:title" content="cocos2dx第一个项目分析">
+<meta name="twitter:description" content="Director(导演)类
+123456789101112131415161718192021222324252627282930313233343536373839404142434445bool AppDelegate::applicationDidFinishLaunching() &amp;#123;    // 单例方法获取导演类    auto director = Director::get">
 
 
 
@@ -127,13 +124,13 @@ Handler特点
 
 
 
-  <link rel="canonical" href="http://blog.zengjunnan.com/2017/02/06/Android中Handler详解/"/>
+  <link rel="canonical" href="http://blog.zengjunnan.com/2017/07/30/cocos2dx第一个项目分析/"/>
 
 
 
 
 
-  <title> Android中Handler详解 | 曾俊男个人博客 </title>
+  <title> cocos2dx第一个项目分析 | 曾俊男个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +253,7 @@ Handler特点
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.zengjunnan.com/2017/02/06/Android中Handler详解/">
+  <link itemprop="mainEntityOfPage" href="http://blog.zengjunnan.com/2017/07/30/cocos2dx第一个项目分析/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="曾俊男">
@@ -280,7 +277,7 @@ Handler特点
             
             
               
-                Android中Handler详解
+                cocos2dx第一个项目分析
               
             
           </h1>
@@ -295,8 +292,8 @@ Handler特点
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-06T10:25:08+08:00">
-                2017-02-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T17:10:44+08:00">
+                2017-07-30
               </time>
             
 
@@ -314,8 +311,8 @@ Handler特点
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/06/Android中Handler详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/06/Android中Handler详解/" itemprop="commentCount"></span>
+                <a href="/2017/07/30/cocos2dx第一个项目分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/30/cocos2dx第一个项目分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -325,7 +322,7 @@ Handler特点
 
           
           
-             <span id="/2017/02/06/Android中Handler详解/" class="leancloud_visitors" data-flag-title="Android中Handler详解">
+             <span id="/2017/07/30/cocos2dx第一个项目分析/" class="leancloud_visitors" data-flag-title="cocos2dx第一个项目分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -352,9 +349,8 @@ Handler特点
       
 
       
-        <p>###Handler的定义<br>主要是接受子线程发送的数据，并用此线程数据配合主线程更新UI。</p>
-<p>Handler特点</p>
-<p>1.handler可以分发Message对象和Runnable对象到主线程中，每个Handler实例，都会绑定到创建他的线程中。</p>
+        <p>Director(导演)类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">bool AppDelegate::applicationDidFinishLaunching() &#123;</div><div class="line">    // 单例方法获取导演类</div><div class="line">    auto director = Director::getInstance();</div><div class="line">    </div><div class="line">    auto glview = director-&gt;getOpenGLView();</div><div class="line">    if(!glview) &#123;</div><div class="line">        glview = GLViewImpl::create(&quot;My Game&quot;);</div><div class="line">        director-&gt;setOpenGLView(glview);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 设置是否使用帧率信息</div><div class="line">    director-&gt;setDisplayStats(true);</div><div class="line"></div><div class="line">    // set FPS. the default value is 1.0/60 if you don&apos;t call this</div><div class="line">    director-&gt;setAnimationInterval(1.0 / 60);</div><div class="line"></div><div class="line">    // Set the design resolution</div><div class="line">    glview-&gt;setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);</div><div class="line">    Size frameSize = glview-&gt;getFrameSize();</div><div class="line">    // if the frame&apos;s height is larger than the height of medium size.</div><div class="line">    if (frameSize.height &gt; mediumResolutionSize.height)</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(largeResolutionSize.height/designResolutionSize.height, largeResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line">    // if the frame&apos;s height is larger than the height of small size.</div><div class="line">    else if (frameSize.height &gt; smallResolutionSize.height)</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(mediumResolutionSize.height/designResolutionSize.height, mediumResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line">    // if the frame&apos;s height is smaller than the height of medium size.</div><div class="line">    else</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    register_all_packages();</div><div class="line"></div><div class="line">    // create a scene. it&apos;s an autorelease object</div><div class="line">    auto scene = HelloWorld::createScene();</div><div class="line"></div><div class="line">    // run</div><div class="line">    director-&gt;runWithScene(scene);</div><div class="line"></div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -399,7 +395,7 @@ Handler特点
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/cocos2dx/" rel="tag"># cocos2dx</a>
           
         </div>
       
@@ -408,8 +404,8 @@ Handler特点
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/16/Android按钮点击波纹效果/" rel="next" title="Android按钮点击波纹效果">
-                <i class="fa fa-chevron-left"></i> Android按钮点击波纹效果
+              <a href="/2017/07/26/cocos2dx开发，添加Admob，需要添加的库文件/" rel="next" title="cocos2dx开发，添加Admob，需要添加的库文件">
+                <i class="fa fa-chevron-left"></i> cocos2dx开发，添加Admob，需要添加的库文件
               </a>
             
           </div>
@@ -417,10 +413,6 @@ Handler特点
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/06/Android开发中常见问题/" rel="prev" title="Android开发中常见问题">
-                Android开发中常见问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -446,8 +438,8 @@ Handler特点
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/06/Android中Handler详解/"
-           data-title="Android中Handler详解" data-url="http://blog.zengjunnan.com/2017/02/06/Android中Handler详解/">
+      <div class="ds-thread" data-thread-key="2017/07/30/cocos2dx第一个项目分析/"
+           data-title="cocos2dx第一个项目分析" data-url="http://blog.zengjunnan.com/2017/07/30/cocos2dx第一个项目分析/">
       </div>
     
   </div>
