@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="曾俊男个人博客">
 <meta property="og:description" content="Director(导演)类
 123456789101112131415161718192021222324252627282930313233343536373839404142434445bool AppDelegate::applicationDidFinishLaunching() &amp;#123;    // 单例方法获取导演类    auto director = Director::get">
-<meta property="og:updated_time" content="2017-07-30T09:58:23.000Z">
+<meta property="og:updated_time" content="2017-08-10T09:21:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2dx第一个项目分析">
 <meta name="twitter:description" content="Director(导演)类
@@ -351,7 +351,26 @@
       
         <p>Director(导演)类</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">bool AppDelegate::applicationDidFinishLaunching() &#123;</div><div class="line">    // 单例方法获取导演类</div><div class="line">    auto director = Director::getInstance();</div><div class="line">    </div><div class="line">    auto glview = director-&gt;getOpenGLView();</div><div class="line">    if(!glview) &#123;</div><div class="line">        glview = GLViewImpl::create(&quot;My Game&quot;);</div><div class="line">        director-&gt;setOpenGLView(glview);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 设置是否使用帧率信息</div><div class="line">    director-&gt;setDisplayStats(true);</div><div class="line"></div><div class="line">    // set FPS. the default value is 1.0/60 if you don&apos;t call this</div><div class="line">    director-&gt;setAnimationInterval(1.0 / 60);</div><div class="line"></div><div class="line">    // Set the design resolution</div><div class="line">    glview-&gt;setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);</div><div class="line">    Size frameSize = glview-&gt;getFrameSize();</div><div class="line">    // if the frame&apos;s height is larger than the height of medium size.</div><div class="line">    if (frameSize.height &gt; mediumResolutionSize.height)</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(largeResolutionSize.height/designResolutionSize.height, largeResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line">    // if the frame&apos;s height is larger than the height of small size.</div><div class="line">    else if (frameSize.height &gt; smallResolutionSize.height)</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(mediumResolutionSize.height/designResolutionSize.height, mediumResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line">    // if the frame&apos;s height is smaller than the height of medium size.</div><div class="line">    else</div><div class="line">    &#123;        </div><div class="line">        director-&gt;setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    register_all_packages();</div><div class="line"></div><div class="line">    // create a scene. it&apos;s an autorelease object</div><div class="line">    auto scene = HelloWorld::createScene();</div><div class="line"></div><div class="line">    // run</div><div class="line">    director-&gt;runWithScene(scene);</div><div class="line"></div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+<p>在Cocos2d-x-3.x引擎中，采用节点树形结构来管理游戏对象，一个游戏可以划分为不同的场景，一个场景又可以分为不同的层，一个层又可以拥有任意个可见的游戏节点（即对象，游戏中基本上所有的类都派生节点类Node）。可以执行Action来修改游戏节点的属性，使其移动，旋转，放大，缩小等等。</p>
+<p>每一时刻都有一个场景在独立运行，通过切换不同场景来完成一个游戏流程，游戏流程的管理由Director来执行</p>
+<h3 id="导演（Director）"><a href="#导演（Director）" class="headerlink" title="导演（Director）"></a>导演（Director）</h3><p>在Cocos2dx中吧统筹游戏大局的类抽象为导演（Director），Director是整个cocos2dx引擎的核心，是正个游戏的导航仪，游戏中的一些常用操作都是由Dircetor来控制的，比如OpenGL ES的初始化，场景的转换，游戏暂停继续的控制，世界坐标和GL坐标之间的切换，对节点的控制等，还有一些游戏数据的保存调用，屏幕尺寸的获取等都要由Director类来管理控制。</p>
+<p>因为Director是游戏项目的总导演，会经常调用进行一些控制，所以Director利用了单例设计模式也就是项目里获取的director都是同一个。用getInstance()方法获取Director的实例。</p>
+<h3 id="场景（Scene）"><a href="#场景（Scene）" class="headerlink" title="场景（Scene）"></a>场景（Scene）</h3><p>scene场景也是cocos2dx中必不可少的元素，游戏中通常我们需要构建不同的场景（至少一个），游戏里面的关卡，板块的切换也就是一个一个场景的切换，就像在电影中变换舞台和场地一样。场景的一个重要作用就是流程控制的作用，我们可以通过Dircetor的一些列方法控制游戏中不同场景自由切换。</p>
+<h4 id="下面是Director控制场景的常用方法："><a href="#下面是Director控制场景的常用方法：" class="headerlink" title="下面是Director控制场景的常用方法："></a>下面是Director控制场景的常用方法：</h4><p>runWithScene（Scene *scene）启动游戏，并运行scene场景。本方法在主程序第一次启动主场的时候调用。如果已有正在运行的场景则不能调用该方法。会调用pushScene-&gt;startAnimation</p>
+<p>pushScene(Scene *scene)将当前运行中的场景暂停并压人到代码执行场景栈中，再将传入的scene设置为当前运行场景，只用存在运行的场景时才调用该方法。</p>
+<p>replaceScene(Scene *scene)直接使用传入的scene替换当前场景来切换画面，当前场景被释放。这是切换场景最常用的方法。</p>
+<p>popScene（）释放当前场景。再从代码执行场景中弹出，并将其设置为当前运行场景，如果栈为空，直接结束应用。和PushScene结合使用</p>
+<p>end（）释放执行场景，同时退出应用</p>
+<p>pause（）暂停当前运行场景中所有计算器和动作，场景仍难会显示在屏幕上</p>
+<p>resume（）恢复当前运行场景的所有计算器和动作，场景仍会显示在屏幕上</p>
+<p>同时场景时层的容器，包含了所有需要显示的游戏元素。通常我们需要完成一个场景时候，会创建一个Scene的子类，并在子类中实现我们需要的功能。比如，我们可以在子类的初始化中载入游戏资源，为场景添加层，启动音乐播放等等。</p>
+<h3 id="层（Layer）"><a href="#层（Layer）" class="headerlink" title="层（Layer）"></a>层（Layer）</h3><p>Layer是处理玩家事件响应的Node子类，与场景不同，层通常包含的是直接在屏幕上呈现的内容，并且可以接受用户输入事件，包含触摸，加速度计和键盘输入等。我们需要在层中加入精灵。文本标签火灾其他游戏元素，并设置游戏元素的属性，比如位置，方向和大小。设置游戏元素的动作等。通常，层中的对象功能类似，耦合较紧，与层中游戏内容相关的逻辑代码也编写在层中，在组织层好后，只需把层按照顺序添加到场景中就可以显示出来了。要向场景添加层，可以使用addChild方法。</p>
+<p>addChild(Node child)</p>
+<p>addChild(NOde child,int zOrder)</p>
+<p>addChild(Node *child,int zOrder,int tag)</p>
+<p>其中，Child参数就是节点。对于场景而言，通常我们添加的节点就是层。先添加的层会被置于后添加的层之下。如果需要为它们指定先后次序，可以使用不同的zOrder值。tag是元素的标识号码，如果为子节点设置了tag值，就可以在它的父节点中利用tag值就可以找到它了。层可以包含任何Node作为子节点，包括Sprites(精灵), Labels(标签)，甚至其他的Layer对象。</p>
+<h3 id="精灵"><a href="#精灵" class="headerlink" title="精灵"></a>精灵</h3><p>Cocos2dx 中的精灵和其他游戏引擎的精灵相似，它可以移动，旋转，缩放，执行动画，并接受其他转换。Cocos2dx的Sprine由Texture，frame和animation组成，由openes负责渲染。主要的类关系如下。</p>
+<h3 id="节点（Node）"><a href="#节点（Node）" class="headerlink" title="节点（Node）"></a>节点（Node）</h3>
       
     </div>
 
@@ -467,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -524,6 +552,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导演（Director）"><span class="nav-number">1.</span> <span class="nav-text">导演（Director）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景（Scene）"><span class="nav-number">2.</span> <span class="nav-text">场景（Scene）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面是Director控制场景的常用方法："><span class="nav-number">2.1.</span> <span class="nav-text">下面是Director控制场景的常用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层（Layer）"><span class="nav-number">3.</span> <span class="nav-text">层（Layer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精灵"><span class="nav-number">4.</span> <span class="nav-text">精灵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点（Node）"><span class="nav-number">5.</span> <span class="nav-text">节点（Node）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
