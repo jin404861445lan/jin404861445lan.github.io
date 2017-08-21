@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="曾俊男个人博客">
 <meta property="og:description" content="在Cocos2d-x-3.x引擎中，采用节点树形结构来管理游戏对象，一个游戏可以划分为不同的场景，一个场景又可以分为不同的层，一个层又可以拥有任意个可见的游戏节点（即对象，游戏中基本上所有的类都派生节点类Node）。可以执行Action来修改游戏节点的属性，使其移动，旋转，放大，缩小等等。
 每一时刻都有一个场景在独立运行，通过切换不同场景来完成一个游戏流程，游戏流程的管理由Director来执行">
-<meta property="og:updated_time" content="2017-08-11T02:48:29.000Z">
+<meta property="og:updated_time" content="2017-08-15T07:52:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2dx第一个项目分析">
 <meta name="twitter:description" content="在Cocos2d-x-3.x引擎中，采用节点树形结构来管理游戏对象，一个游戏可以划分为不同的场景，一个场景又可以分为不同的层，一个层又可以拥有任意个可见的游戏节点（即对象，游戏中基本上所有的类都派生节点类Node）。可以执行Action来修改游戏节点的属性，使其移动，旋转，放大，缩小等等。
@@ -371,7 +371,14 @@
 <h3 id="调度器（scheduler）"><a href="#调度器（scheduler）" class="headerlink" title="调度器（scheduler）"></a>调度器（scheduler）</h3><p>调度器为游戏提供定时事件和定时调用服务。所有Node对象都知道如何调度和取消调度事件，使用调度器有几个好处：</p>
 <p>1.每当Node不再可见或已从场景中移除时，调度器会停止。<br>2.Cocos2dx暂停时，调度器也会停止。当Cocos2dx重新开始时，调度器也会自动继续启动。<br>3.Cocos2dx封装了一个供各种不同平台使用的调度器，使用此调度器不用关心和跟踪你所设定的定时对象的销毁和停止，以及奔溃的风险。</p>
 <p>游戏中我们经常会随时间的变化而做一些逻辑判读，入碰撞检测。为了解决以上问题，我们引入了调度器，这使的游戏能够更好的处理动态事件。<br>Cocos2dx提供了多种调度机制，在开发中我们通常会用到3中调度器：<br>1.默认调度器：schedulerUpdate（）<br>2.自定义调度器：schedule(SEL_SCHEDULE selector, float interval, unsigned int repeat, float delay)<br>3.单次调度器：scheduleOnce(SEL_SCHEDULE selector, float delay)</p>
-<h3 id="Cocos2dx坐标系详解"><a href="#Cocos2dx坐标系详解" class="headerlink" title="Cocos2dx坐标系详解"></a>Cocos2dx坐标系详解</h3><h4 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h4><h4 id="描点（Anchor-Point）"><a href="#描点（Anchor-Point）" class="headerlink" title="描点（Anchor Point）"></a>描点（Anchor Point）</h4>
+<h3 id="Cocos2dx坐标系详解"><a href="#Cocos2dx坐标系详解" class="headerlink" title="Cocos2dx坐标系详解"></a>Cocos2dx坐标系详解</h3><h4 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h4><p>世界坐标VS本地坐标</p>
+<p>世界坐标也叫绝对坐标，是游戏开发者建立的概念。cocos2dx中的元素是有父子关系的层级结构，我们通过Node的setPosition设定元素的位置，使用的是相对于父节点的本地坐标而非世界坐标。最后映射成世界坐标</p>
+<p>本地坐标也叫相对坐标，是和节点相关联的坐标系。</p>
+<h4 id="描点（Anchor-Point）"><a href="#描点（Anchor-Point）" class="headerlink" title="描点（Anchor Point）"></a>描点（Anchor Point）</h4><h4 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h4><p>动作类（Action）是所有动作的基类，它创建的一个对象代表一个动作。动作作用于Node，因此每个动作都需要由Node对象执行。动作类（Action）作为基类，实际上是一个接口，动作类的大多数实现类都是排生于有限时间动作类（Finite TimeAction）</p>
+<p>即时动作<br>只能够立即完成的动作，这类动作是在下一帧</p>
+<p>Place </p>
+<p>该动作将节点放置到某个指定位置，其作用与修改节点的position属性相同。</p>
+
       
     </div>
 
@@ -510,7 +517,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -563,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导演（Director）"><span class="nav-number">1.</span> <span class="nav-text">导演（Director）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景（Scene）"><span class="nav-number">2.</span> <span class="nav-text">场景（Scene）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面是Director控制场景的常用方法："><span class="nav-number">2.1.</span> <span class="nav-text">下面是Director控制场景的常用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层（Layer）"><span class="nav-number">3.</span> <span class="nav-text">层（Layer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精灵"><span class="nav-number">4.</span> <span class="nav-text">精灵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度器（scheduler）"><span class="nav-number">5.</span> <span class="nav-text">调度器（scheduler）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cocos2dx坐标系详解"><span class="nav-number">6.</span> <span class="nav-text">Cocos2dx坐标系详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#坐标"><span class="nav-number">6.1.</span> <span class="nav-text">坐标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描点（Anchor-Point）"><span class="nav-number">6.2.</span> <span class="nav-text">描点（Anchor Point）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#导演（Director）"><span class="nav-number">1.</span> <span class="nav-text">导演（Director）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景（Scene）"><span class="nav-number">2.</span> <span class="nav-text">场景（Scene）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面是Director控制场景的常用方法："><span class="nav-number">2.1.</span> <span class="nav-text">下面是Director控制场景的常用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层（Layer）"><span class="nav-number">3.</span> <span class="nav-text">层（Layer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精灵"><span class="nav-number">4.</span> <span class="nav-text">精灵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度器（scheduler）"><span class="nav-number">5.</span> <span class="nav-text">调度器（scheduler）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cocos2dx坐标系详解"><span class="nav-number">6.</span> <span class="nav-text">Cocos2dx坐标系详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#坐标"><span class="nav-number">6.1.</span> <span class="nav-text">坐标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描点（Anchor-Point）"><span class="nav-number">6.2.</span> <span class="nav-text">描点（Anchor Point）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动作"><span class="nav-number">6.3.</span> <span class="nav-text">动作</span></a></li></ol></li></ol></div>
             
 
           </div>
