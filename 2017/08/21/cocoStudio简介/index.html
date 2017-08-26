@@ -90,7 +90,7 @@
 1FileUtils::getInstance()-&amp;gt;addSearchPath(&amp;quot;res&amp;quot;);
 2.获取资源文件1Node *rootDode=CSLo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cocoStudio简介">
+<meta property="og:title" content="Cocos Studio简介">
 <meta property="og:url" content="http://blog.zengjunnan.com/2017/08/21/cocoStudio简介/index.html">
 <meta property="og:site_name" content="曾俊男个人博客">
 <meta property="og:description" content="1.设置资源搜索路径在AppDelegate设置
@@ -98,9 +98,9 @@
 12#include &amp;quot;cocostudio/CocoStudio.h&amp;quot;#include &amp;quot;ui/CocosGUI.h&amp;quot;
 1FileUtils::getInstance()-&amp;gt;addSearchPath(&amp;quot;res&amp;quot;);
 2.获取资源文件1Node *rootDode=CSLo">
-<meta property="og:updated_time" content="2017-08-21T07:57:43.000Z">
+<meta property="og:updated_time" content="2017-08-22T01:33:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cocoStudio简介">
+<meta name="twitter:title" content="Cocos Studio简介">
 <meta name="twitter:description" content="1.设置资源搜索路径在AppDelegate设置
 头文件
 12#include &amp;quot;cocostudio/CocoStudio.h&amp;quot;#include &amp;quot;ui/CocosGUI.h&amp;quot;
@@ -139,7 +139,7 @@
 
 
 
-  <title> cocoStudio简介 | 曾俊男个人博客 </title>
+  <title> Cocos Studio简介 | 曾俊男个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +286,7 @@
             
             
               
-                cocoStudio简介
+                Cocos Studio简介
               
             
           </h1>
@@ -331,7 +331,7 @@
 
           
           
-             <span id="/2017/08/21/cocoStudio简介/" class="leancloud_visitors" data-flag-title="cocoStudio简介">
+             <span id="/2017/08/21/cocoStudio简介/" class="leancloud_visitors" data-flag-title="Cocos Studio简介">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -367,6 +367,11 @@
 <h3 id="4-Button添加事件"><a href="#4-Button添加事件" class="headerlink" title="4.Button添加事件"></a>4.Button添加事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">btnStart=(Button *)Helper::seekWidgetByName(root, &quot;Button_5&quot;);</div><div class="line">    text=(Text *)Helper::seekWidgetByName(root, &quot;Text_4&quot;);</div><div class="line">    btnStart-&gt;addTouchEventListener(CC_CALLBACK_2(HelloWorld::startGame, this));</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">void HelloWorld::startGame(Ref *pSender,Widget::TouchEventType type)&#123;</div><div class="line">    switch (type) &#123;</div><div class="line">        case Widget::TouchEventType::BEGAN:</div><div class="line">            text-&gt;setString(&quot;BEGAN&quot;);</div><div class="line">            break;</div><div class="line">        case Widget::TouchEventType:: MOVED:</div><div class="line">              text-&gt;setString(&quot;MOVED&quot;);</div><div class="line">            break;</div><div class="line">           </div><div class="line">        case Widget::TouchEventType::ENDED:</div><div class="line">              text-&gt;setString(&quot;ENDED&quot;);</div><div class="line">            break;</div><div class="line"></div><div class="line">        case Widget::TouchEventType::CANCELED:</div><div class="line">              text-&gt;setString(&quot;CANCELED&quot;);</div><div class="line">            break;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <h4 id="5-切换游戏场景"><a href="#5-切换游戏场景" class="headerlink" title="5.切换游戏场景"></a>5.切换游戏场景</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">auto trasition=TransitionCrossFade::create(1.0f, scene);</div><div class="line">        </div><div class="line">Director::getInstance()-&gt;pushScene(trasition);</div></pre></td></tr></table></figure>
+<h4 id="6-动画效果"><a href="#6-动画效果" class="headerlink" title="6.动画效果"></a>6.动画效果</h4><h5 id="淡出动画"><a href="#淡出动画" class="headerlink" title="淡出动画"></a>淡出动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">ImageView *iv=ImageView::create(&quot;res/ic_launcher.png&quot;);</div><div class="line">iv-&gt;setPosition(Vec2(100, 100));</div><div class="line">iv-&gt;setScale(0.4);</div><div class="line">auto fadeOut=FadeOut::create(1.0f);</div><div class="line">iv-&gt;runAction(fadeOut);</div></pre></td></tr></table></figure>
+<h5 id="执行多个动画"><a href="#执行多个动画" class="headerlink" title="执行多个动画"></a>执行多个动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">auto fadeOut=FadeOut::create(1.0f);</div><div class="line">auto fadeIn=FadeIn::create(1.0f);</div><div class="line">auto seq=Sequence::create(fadeOut,fadeIn,fadeOut, NULL);</div><div class="line">iv-&gt;runAction(seq);</div></pre></td></tr></table></figure>
+<h5 id="执行重复动作"><a href="#执行重复动作" class="headerlink" title="执行重复动作"></a>执行重复动作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">auto fadeOut=FadeOut::create(1.0f);</div><div class="line">auto fadeIn=FadeIn::create(1.0f);</div><div class="line">auto seq=Sequence::create(fadeOut,fadeIn, NULL);</div><div class="line">auto re=RepeatForever::create(seq);</div><div class="line">iv-&gt;runAction(re);</div></pre></td></tr></table></figure>
+<h5 id="放大缩小动画"><a href="#放大缩小动画" class="headerlink" title="放大缩小动画"></a>放大缩小动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">auto scal=ScaleBy::create(2, 2);</div><div class="line">iv-&gt;runAction(scal);</div></pre></td></tr></table></figure>
+<h5 id="位移动画"><a href="#位移动画" class="headerlink" title="位移动画"></a>位移动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auto move=MoveBy::create(4, Vec2(100, 100));</div><div class="line">auto seq2=Sequence::create(move,move-&gt;reverse(), NULL);</div><div class="line">iv-&gt;runAction(seq2);</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -455,7 +460,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/08/21/cocoStudio简介/"
-           data-title="cocoStudio简介" data-url="http://blog.zengjunnan.com/2017/08/21/cocoStudio简介/">
+           data-title="Cocos Studio简介" data-url="http://blog.zengjunnan.com/2017/08/21/cocoStudio简介/">
       </div>
     
   </div>
@@ -555,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-设置资源搜索路径"><span class="nav-number">1.</span> <span class="nav-text">1.设置资源搜索路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-获取资源文件"><span class="nav-number">2.</span> <span class="nav-text">2.获取资源文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取控件"><span class="nav-number"></span> <span class="nav-text">3.获取控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Button添加事件"><span class="nav-number"></span> <span class="nav-text">4.Button添加事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-切换游戏场景"><span class="nav-number">1.</span> <span class="nav-text">5.切换游戏场景</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-设置资源搜索路径"><span class="nav-number">1.</span> <span class="nav-text">1.设置资源搜索路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-获取资源文件"><span class="nav-number">2.</span> <span class="nav-text">2.获取资源文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取控件"><span class="nav-number"></span> <span class="nav-text">3.获取控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Button添加事件"><span class="nav-number"></span> <span class="nav-text">4.Button添加事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-切换游戏场景"><span class="nav-number">1.</span> <span class="nav-text">5.切换游戏场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-动画效果"><span class="nav-number">2.</span> <span class="nav-text">6.动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#淡出动画"><span class="nav-number">2.1.</span> <span class="nav-text">淡出动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行多个动画"><span class="nav-number">2.2.</span> <span class="nav-text">执行多个动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行重复动作"><span class="nav-number">2.3.</span> <span class="nav-text">执行重复动作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#放大缩小动画"><span class="nav-number">2.4.</span> <span class="nav-text">放大缩小动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#位移动画"><span class="nav-number">2.5.</span> <span class="nav-text">位移动画</span></a></li></ol></li></ol></div>
             
 
           </div>
